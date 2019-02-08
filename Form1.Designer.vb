@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtDatos = New System.Windows.Forms.TextBox()
         Me.btnFtpUp = New System.Windows.Forms.Button()
@@ -31,6 +31,7 @@ Partial Class Form1
         Me.pb1 = New System.Windows.Forms.PictureBox()
         Me.btnParalle_Invoke = New System.Windows.Forms.Button()
         Me.btnIP = New System.Windows.Forms.Button()
+        Me.btnCollections = New System.Windows.Forms.Button()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -111,18 +112,28 @@ Partial Class Form1
         '
         'btnIP
         '
-        Me.btnIP.Location = New System.Drawing.Point(648, 77)
+        Me.btnIP.Location = New System.Drawing.Point(424, 80)
         Me.btnIP.Name = "btnIP"
         Me.btnIP.Size = New System.Drawing.Size(144, 39)
         Me.btnIP.TabIndex = 9
         Me.btnIP.Text = "Pon IP's"
         Me.btnIP.UseVisualStyleBackColor = True
         '
+        'btnCollections
+        '
+        Me.btnCollections.Location = New System.Drawing.Point(733, 64)
+        Me.btnCollections.Name = "btnCollections"
+        Me.btnCollections.Size = New System.Drawing.Size(156, 28)
+        Me.btnCollections.TabIndex = 10
+        Me.btnCollections.Text = "MKKIT_Collections"
+        Me.btnCollections.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 463)
+        Me.Controls.Add(Me.btnCollections)
         Me.Controls.Add(Me.btnIP)
         Me.Controls.Add(Me.btnParalle_Invoke)
         Me.Controls.Add(Me.pb1)
@@ -148,4 +159,5 @@ Partial Class Form1
     Friend WithEvents pb1 As PictureBox
     Friend WithEvents btnParalle_Invoke As Button
     Friend WithEvents btnIP As Button
+    Friend WithEvents btnCollections As Button
 End Class

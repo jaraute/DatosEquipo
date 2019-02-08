@@ -274,9 +274,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnImagen_Click(sender As Object, e As EventArgs) Handles btnImagen.Click
-        'https://i.pinimg.com/originals/c9/b8/6b/c9b86b82df865882288a0873c4d7630e.jpg
-        'https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/49158364_1956079217840920_2849087631206121472_o.jpg?_nc_cat=102&_nc_ht=scontent-mad1-1.xx&oh=75a603d7227e7dbb76e2d1bddb3addf4&oe=5CB71500
-        Dim rutaWebImagen As String = "https://i.pinimg.com/originals/c9/b8/6b/c9b86b82df865882288a0873c4d7630e.jpg"
+        Dim rutaWebImagen As String = "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/49158364_1956079217840920_2849087631206121472_o.jpg?_nc_cat=102&_nc_ht=scontent-mad1-1.xx&oh=75a603d7227e7dbb76e2d1bddb3addf4&oe=5CB71500"
+        'Dim rutaWebImagen As String = "https://i.pinimg.com/originals/c9/b8/6b/c9b86b82df865882288a0873c4d7630e.jpg"
         rutaWebImagen = InputBox("Ruta de la imagen", "Descargar imagen", rutaWebImagen)
 
         If rutaWebImagen.ToLower.StartsWith("http") Then
@@ -340,5 +339,60 @@ Public Class Form1
         mensajes &= "domain_user = " & WindowsIdentity.GetCurrent().Name & vbCrLf
         mensajes &= "computerDomain = " & WindowsIdentity.GetCurrent().User.Value
         txtDatos.Text = mensajes
+    End Sub
+
+    Private Sub btnCollections_Click(sender As Object, e As EventArgs) Handles btnCollections.Click
+        ' DictionaryToString
+        Dim dicPro As New Dictionary(Of String, String)
+        dicPro.Add("cero", "0")
+        dicPro.Add("uno", "1")
+        dicPro.Add("dos", "2")
+        dicPro.Add("tres", "3")
+        dicPro.Add("cuatro", "4")
+        dicPro.Add("cinco", "5")
+        dicPro.Add("seis", "6")
+        dicPro.Add("siete", "7")
+        dicPro.Add("ocho", "8")
+        dicPro.Add("nueve", "9")
+        dicPro.Add("diez", "10")
+        dicPro.Add("once", "11")
+        dicPro.Add("doce", "12")
+        dicPro.Add("trece", "13")
+        '
+        txtDatos.Text = "*** DictionaryToString ***" & vbCrLf
+        txtDatos.Text = "dicPro (Keys=" & dicPro.Keys.Count & ", Values=" & dicPro.Values.Count & ")" & vbCrLf
+        txtDatos.Text += "DictionaryToString = " & Dictionary_ToString(dicPro)
+        txtDatos.Text += vbCrLf + vbCrLf
+        '
+        ' StringToDictionary
+        Dim cadena = "cero·0|uno·1|dos·2|tres·3|cuatro·4|cinco·5|seis·6|siete·7|ocho·8|nueve·9|diez·10|once·11|doce·12|trece·13"
+        Dim newDic As Dictionary(Of String, String) = String_ToDictionary(cadena)
+        '
+        txtDatos.Text += "*** StringToDictionary ***" & vbCrLf
+        txtDatos.Text += "Origen=" + cadena & vbCrLf
+        txtDatos.Text += "newDic (Keys=" & newDic.Keys.Count & ", Values=" & newDic.Values.Count & ")" + vbCrLf
+        txtDatos.Text += Dictionary_Imprime(newDic) + vbCrLf
+        txtDatos.Text += vbCrLf + vbCrLf
+        '
+        ' ArrayToString
+        Dim arrPro() As String = {
+            "cero·0·cm", "uno·1·mm", "dos·2·", "tres·3·cm", "cuatro·4·cm", "cinco·5·cm", "seis·6·cm",
+            "siete·7·cm", "ocho·8·cm", "nueve·9·cm", "diez·10·kg", "once·11·", "doce·12·cm", "trece·13·mm"}
+        '
+        txtDatos.Text += "*** ArrayToString ***" & vbCrLf
+        txtDatos.Text += "arrPro (Nº Items=" & arrPro.Count & ")" & vbCrLf
+        txtDatos.Text += "ArrayToString = " & Array_ToString(arrPro)
+        txtDatos.Text += vbCrLf + vbCrLf
+        '
+        ' StringToArray
+        Dim cadena1 = "cero·0·cm|uno·1·mm|dos·2·|tres·3·cm|cuatro·4·cm|cinco·5·cm|seis·6·cm|"
+        cadena1 += "siete·7·cm|ocho·8·cm|nueve·9·cm|diez·10·kg|once·11·|doce·12·cm|trece·13·mm"
+        Dim newArr() As String = String_ToArray(cadena1)
+        '
+        txtDatos.Text += "*** StringToDictionary ***" & vbCrLf
+        txtDatos.Text += "Origen=" + cadena1 & vbCrLf
+        txtDatos.Text += "newArr (Nº Items=" & newArr.Count & ")" + vbCrLf
+        txtDatos.Text += Array_Imprime(newArr) + vbCrLf
+        txtDatos.Text += vbCrLf + vbCrLf
     End Sub
 End Class
