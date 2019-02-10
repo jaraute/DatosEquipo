@@ -6,7 +6,6 @@ Imports System.Text.RegularExpressions
 Imports IWshRuntimeLibrary
 
 Public Class Form1
-    Public cFtp As clsFTP = Nothing
     Public ficheroLocal As String = "C:\Temp\ErrorFatal_0x0028.png"
     '
     ' ***** Servidor Primario FTP
@@ -28,7 +27,6 @@ Public Class Form1
     '
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
-        cFtp = New clsFTP(FTP1_host, FTP1_dir, FTP1_user, FTP1_pass)
     End Sub
     '' Delegado para escribir en txtDatos.Text
     Public Delegate Sub PonTextoCallBack(text As String)
@@ -50,165 +48,6 @@ Public Class Form1
         End If
     End Sub
 
-    'End Sub
-    Public Shared Sub Pon(queTexto As String)
-        'If borrar Then
-        '    Form1.txtDatos.Text = queTexto & IIf(queTexto.EndsWith(vbCrLf), "", vbCrLf)
-        'Else
-        Form1.txtDatos.Text &= queTexto & IIf(queTexto.EndsWith(vbCrLf), "", vbCrLf)
-        'End If
-        Form1.txtDatos.Refresh()
-    End Sub
-
-    Function FTP_SubirFichero() As String
-        Dim resultado As String = ""
-        '
-        Try
-            My.Computer.Network.UploadFile(
-                sourceFileName:=ficheroLocal,
-                address:=FTP1_ficheroFtp,
-                userName:=FTP1_user,
-                password:=FTP1_pass)
-        Catch ex As Exception
-            resultado = ex.ToString
-        End Try
-
-        'Dim miUri As String = "ftp://ftp.midominio.com/carpeta/fichero.jpg"
-        'Dim miRequest As Net.FtpWebRequest = Net.WebRequest.Create(miUri)
-        'miRequest.Credentials = New Net.NetworkCredential("user", "pass")
-        'miRequest.Method = Net.WebRequestMethods.Ftp.UploadFile
-        'Try
-        '    Dim bFile() As Byte = System.IO.File.ReadAllBytes("C:\carpeta\fichero.jpg")
-        '    Dim miStream As System.IO.Stream = miRequest.GetRequestStream()
-        '    miStream.Write(bFile, 0, bFile.Length)
-        '    miStream.Close()
-        '    miStream.Dispose()
-        'Catch ex As Exception
-        '    Throw New Exception(ex.Message & ". El Archivo no pudo ser enviado.")
-        'End Try
-        Return resultado
-    End Function
-
-    Public Function FTP_Upload() As String
-        Dim resultado As String = ""
-        Dim fichero As String = "C:\Temp\ErrorFatal_0x0028.png"
-        Dim host As String = "ftp://ttu.ulmaconstruction.com/"
-        Dim dir As String = "ftp://ttu.ulmaconstruction.com/logs/Internal/"
-        Dim destino As String = "ftp://ttu.ulmaconstruction.com/logs/Internal/btbc.info"
-        Dim usuario As String = "ftp_revit_user"
-        Dim clave As String = "RehU768P"
-        '
-        Dim cFtp As New clsFTP(host:=host, dir:=dir, user:=usuario, pass:=clave)
-        resultado = cFtp.FTP_Upload(fichero, destino)
-
-        Return resultado
-    End Function
-    Public Function FTP_Sube1() As String
-        Dim resultado As String = ""
-        Dim fichero As String = "C:\Temp\ErrorFatal_0x0028.png"
-        Dim host As String = "ftp://ttu.ulmaconstruction.com/"
-        Dim dir As String = "ftp://ttu.ulmaconstruction.com/logs/Internal/"
-        Dim destino As String = "ftp://ttu.ulmaconstruction.com/logs/Internal/ErrorFatal_0x0028.png"
-        Dim usuario As String = "ftp_revit_user"
-        Dim clave As String = "RehU768P"
-        '
-        'Upload File to FTP site
-
-        'Create Request To Upload File'
-        Dim wrUpload As FtpWebRequest = DirectCast(WebRequest.Create _
-           (destino), FtpWebRequest)
-        'Specify Username & Password'
-        wrUpload.Credentials = New NetworkCredential(usuario, clave)
-        'Start Upload Process'
-        wrUpload.Method = WebRequestMethods.Ftp.UploadFile
-
-        'Locate File And Store It In Byte Array'
-        Dim btfile() As Byte = IO.File.ReadAllBytes(fichero)
-        Dim strFile As IO.Stream = Nothing
-        Try
-            'Get File'
-            strFile = wrUpload.GetRequestStream()
-            'Upload Each Byte'
-            strFile.Write(btfile, 0, btfile.Length)
-            resultado = destino & " --> Subido"
-        Catch ex As Exception
-            resultado = ex.ToString
-        Finally
-            If strFile IsNot Nothing Then
-                'Close'
-                strFile.Close()
-            End If
-        End Try
-        'Free Memory'
-        strFile.Dispose()
-
-        Return resultado
-    End Function
-    '
-    'Download A File From FTP Site'
-    Private Function FTP_Baja1(fiFtp As String, fiLocal As String, user As String, pass As String) As String
-        Dim resultado As String = ""
-        Dim usuario As String = "ftp_revit_user"
-        Dim clave As String = "RehU768P"
-        '
-        'Create Request To Download File'
-        'Dim wrDownload As FtpWebRequest = WebRequest.Create("ftp://ftp.test.com/file.txt")
-        Dim wrDownload As FtpWebRequest = WebRequest.Create(fiFtp)
-
-        'Specify That You Want To Download A File'
-        wrDownload.Method = WebRequestMethods.Ftp.DownloadFile
-
-        'Specify Username & Password'
-        wrDownload.Credentials = New NetworkCredential(user, pass)
-
-        'Response Object'
-        Dim rDownloadResponse As FtpWebResponse = wrDownload.GetResponse()
-
-        'Incoming File Stream'
-        Dim strFileStream As IO.Stream = rDownloadResponse.GetResponseStream()
-
-        'Read File Stream Data'
-        Dim srFile As IO.StreamReader = New IO.StreamReader(strFileStream)
-
-        'Console.WriteLine(srFile.ReadToEnd())
-        IO.File.WriteAllText(fiLocal, srFile.ReadToEnd)
-
-        'Show Status Of Download'
-        resultado = "Download Complete, status " & rDownloadResponse.StatusDescription
-
-        srFile.Close() 'Close
-
-        rDownloadResponse.Close()
-        Return resultado
-    End Function
-
-    'Delete File On FTP Server'
-    Private Function FTP_Borra1(fiFtp As String) As String
-        Dim resultado As String = ""
-        Dim user As String = "ftp_revit_user"
-        Dim pass As String = "RehU768P"
-
-        'Create Request To Delete File'
-        Dim wrDelete As FtpWebRequest =
-             DirectCast(WebRequest.Create(fiFtp),
-             FtpWebRequest)
-
-        wrDelete.Credentials = New NetworkCredential(user, pass)
-
-        'Specify That You Want To Delete A File'
-        wrDelete.Method = WebRequestMethods.Ftp.DeleteFile
-        'Response Object'
-        Dim rDeleteResponse As FtpWebResponse =
-             CType(wrDelete.GetResponse(),
-             FtpWebResponse)
-        'Show Status Of Delete'
-        'Console.WriteLine("Delete status: {0}", rDeleteResponse.StatusDescription)
-        resultado = "Delete status: " & rDeleteResponse.StatusDescription
-        'Close'
-        rDeleteResponse.Close()
-        Return resultado
-    End Function
-
     Private Sub btnFtpUp_Click(sender As Object, e As EventArgs) Handles btnFtpUp.Click
         Dim dirLogsLocal As String = "C:\Users\alberto.ADA\AppData\Roaming\Autodesk\Revit\Addins\2018\UCRevit2018\logs"
         Dim dirLogsFTP As String = "ftp://ttu.ulmaconstruction.com/logs/Internal"
@@ -216,61 +55,44 @@ Public Class Form1
         For Each fiCsv As String In IO.Directory.GetFiles(dirLogsLocal, "*.csv", IO.SearchOption.TopDirectoryOnly)
             Dim nombre As String = IO.Path.GetFileName(fiCsv)
             Dim fiFtp As String = dirLogsFTP & "/" & nombre
-            Dim resultadoTxt As String = cFtp.FTP_Upload(fiCsv, fiFtp).ToString
-            If resultadoTxt.StartsWith("CORRECTO") Then
+            Dim resultadoTxt As String = UtilesAlberto.Utiles.FTP_Upload(fiCsv, fiFtp, FTP1_user, FTP1_pass)
+            If resultadoTxt.StartsWith("ERROR") = False Then
                 IO.File.Delete(fiCsv)
             End If
         Next
     End Sub
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
-        Dim cFtp As New clsFTP(host:=FTP1_host, dir:=FTP1_dir, user:=FTP1_user, pass:=FTP1_pass)
-        Dim lista As String() = cFtp.FTP_ListaDir(FTP1_dir)
-        If lista.Length = 1 AndAlso lista(0).ToString.ToUpper = "ERROR" Then
+        Dim Resultado As String = UtilesAlberto.Utiles.FTP_ListaDir(FTP1_dir, FTP1_user, FTP1_pass)
+        If Resultado.ToUpper.StartsWith("ERROR") Then
             txtDatos.Text = "Falla la comunicación con el servidor"
-        ElseIf lista.Length = 0 Then
-            txtDatos.Text = "No hay fichero en el directorio"
         Else
-            txtDatos.Text = FTP1_dir & " :" & vbCrLf & vbCrLf & Join(lista, vbCrLf)
+            txtDatos.Text = FTP1_dir & " :" & vbCrLf & vbCrLf & String.Join(vbCrLf, Resultado)
         End If
     End Sub
 
     Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
         txtDatos.Text = ""
-        Dim cFtp As New clsFTP(host:=FTP1_host, dir:=FTP1_dir, user:=FTP1_user, pass:=FTP1_pass)
-        Dim lista As String() = cFtp.FTP_ListaDir(FTP1_dir)
-        If lista.Length = 1 AndAlso lista(0).ToString.ToUpper = "ERROR" Then
-            txtDatos.Text = "Falla la comunicación con el servidor"
-        ElseIf lista.Length = 0 Then
-            txtDatos.Text = "No hay fichero en el directorio"
-        ElseIf lista.Length > 0 Then
-            For Each fiCsv As String In lista
+        Dim Resultado As String = UtilesAlberto.Utiles.FTP_ListaDir(FTP1_dir, FTP1_user, FTP1_pass)
+        If Resultado.ToUpper.StartsWith("ERROR") Then
+            txtDatos.Text = Resultado
+        Else
+            For Each fiCsv As String In String.Join(vbCrLf, Resultado)
                 Dim fiFtp As String = FTP1_dir & "/" & fiCsv
                 '
                 If fiCsv.Contains(Environment.MachineName) = True Then
-                    txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
+                    txtDatos.Text &= vbCrLf & UtilesAlberto.Utiles.FTP_Borra(fiFtp, FTP1_user, FTP2_pass)
                 Else
                     txtDatos.Text &= vbCrLf & fiFtp & " no borrado."
                 End If
             Next
         End If
-
-
-        'Dim fiFtp As String = "ftp://ttu.ulmaconstruction.com/logs/Internal/ErrorFatal_0x0028.png"
-        'txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
-        'fiFtp = "ftp://ttu.ulmaconstruction.com/logs/Internal/fi1.csv"
-        'txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
-        'fiFtp = "ftp://ttu.ulmaconstruction.com/logs/Internal/fi1 - copia.csv"
-        'txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
-        'fiFtp = "ftp://ttu.ulmaconstruction.com/logs/Internal/fi1 - copia - copia.csv"
-        'txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
-        'fiFtp = "ftp://ttu.ulmaconstruction.com/logs/Internal/fi1 - copia - copia - copia.csv"
-        'txtDatos.Text &= vbCrLf & cFtp.FTP_Borra(fiFtp)
     End Sub
 
 
     Private Sub btnExisteDir_Click(sender As Object, e As EventArgs) Handles btnExisteDir.Click
-        txtDatos.Text = cFtp.FTP_ExisteDir(FTP1_dir)
+        txtDatos.Text = UtilesAlberto.Utiles.FTP_ExisteDir(FTP1_dir, FTP1_user, FTP1_pass) & vbCrLf & vbCrLf
+        txtDatos.Text &= UtilesAlberto.Utiles.FTP_ExisteDir(FTP2_dir, FTP2_user, FTP2_pass)
     End Sub
 
     Private Sub btnImagen_Click(sender As Object, e As EventArgs) Handles btnImagen.Click
@@ -331,10 +153,10 @@ Public Class Form1
     Private Sub btnIP_Click(sender As Object, e As EventArgs) Handles btnIP.Click
         txtDatos.Text = ""
         Dim mensajes As String = ""
-        mensajes &= "IP Privada (Solo intranet) = " & IPPrivada_DameLista(True) & vbCrLf
-        mensajes &= "IP's Privadas (Todas) = " & IPPrivada_DameLista(False) & vbCrLf
-        mensajes &= "IP's Privadas (Corto) = " & IPPrivada_DameCorto() & vbCrLf
-        mensajes &= "IP Publica (Internet) = " & IPPublica_Dame() & vbCrLf & vbCrLf
+        mensajes &= "IP Privada (Solo intranet) = " & UtilesAlberto.Utiles.IPPrivada_DameLista(True) & vbCrLf
+        mensajes &= "IP's Privadas (Todas) = " & UtilesAlberto.Utiles.IPPrivada_DameLista(False) & vbCrLf
+        mensajes &= "IP's Privadas (Corto) = " & UtilesAlberto.Utiles.IPPrivada_DameCorto() & vbCrLf
+        mensajes &= "IP Publica (Internet) = " & UtilesAlberto.Utiles.IPPublica_Dame() & vbCrLf & vbCrLf
         mensajes &= "userDomain = " & Environment.UserDomainName & vbCrLf
         mensajes &= "domain_user = " & WindowsIdentity.GetCurrent().Name & vbCrLf
         mensajes &= "computerDomain = " & WindowsIdentity.GetCurrent().User.Value
