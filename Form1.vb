@@ -361,17 +361,17 @@ Public Class Form1
         '
         txtDatos.Text = "*** DictionaryToString ***" & vbCrLf
         txtDatos.Text = "dicPro (Keys=" & dicPro.Keys.Count & ", Values=" & dicPro.Values.Count & ")" & vbCrLf
-        txtDatos.Text += "DictionaryToString = " & Dictionary_ToString(dicPro)
+        txtDatos.Text += "DictionaryToString = " & UtilesAlberto.Utiles.Dictionary_ToString(dicPro)
         txtDatos.Text += vbCrLf + vbCrLf
         '
         ' StringToDictionary
         Dim cadena = "cero·0|uno·1|dos·2|tres·3|cuatro·4|cinco·5|seis·6|siete·7|ocho·8|nueve·9|diez·10|once·11|doce·12|trece·13"
-        Dim newDic As Dictionary(Of String, String) = String_ToDictionary(cadena)
+        Dim newDic As Dictionary(Of String, String) = UtilesAlberto.Utiles.String_ToDictionary(cadena)
         '
         txtDatos.Text += "*** StringToDictionary ***" & vbCrLf
         txtDatos.Text += "Origen=" + cadena & vbCrLf
         txtDatos.Text += "newDic (Keys=" & newDic.Keys.Count & ", Values=" & newDic.Values.Count & ")" + vbCrLf
-        txtDatos.Text += Dictionary_Imprime(newDic) + vbCrLf
+        txtDatos.Text += UtilesAlberto.Utiles.Dictionary_Imprime(newDic) + vbCrLf
         txtDatos.Text += vbCrLf + vbCrLf
         '
         ' ArrayToString
@@ -381,18 +381,18 @@ Public Class Form1
         '
         txtDatos.Text += "*** ArrayToString ***" & vbCrLf
         txtDatos.Text += "arrPro (Nº Items=" & arrPro.Count & ")" & vbCrLf
-        txtDatos.Text += "ArrayToString = " & Array_ToString(arrPro)
+        txtDatos.Text += "ArrayToString = " & UtilesAlberto.Utiles.Array_ToString(arrPro)
         txtDatos.Text += vbCrLf + vbCrLf
         '
         ' StringToArray
         Dim cadena1 = "cero·0·cm|uno·1·mm|dos·2·|tres·3·cm|cuatro·4·cm|cinco·5·cm|seis·6·cm|"
         cadena1 += "siete·7·cm|ocho·8·cm|nueve·9·cm|diez·10·kg|once·11·|doce·12·cm|trece·13·mm"
-        Dim newArr() As String = String_ToArray(cadena1)
+        Dim newArr() As String = UtilesAlberto.Utiles.String_ToArray(cadena1)
         '
         txtDatos.Text += "*** StringToDictionary ***" & vbCrLf
         txtDatos.Text += "Origen=" + cadena1 & vbCrLf
         txtDatos.Text += "newArr (Nº Items=" & newArr.Count & ")" + vbCrLf
-        txtDatos.Text += Array_Imprime(newArr) + vbCrLf
+        txtDatos.Text += UtilesAlberto.Utiles.Array_Imprime(newArr) + vbCrLf
         txtDatos.Text += vbCrLf + vbCrLf
     End Sub
 End Class
