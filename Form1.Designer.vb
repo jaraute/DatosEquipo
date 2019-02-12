@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class btnDuraction
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -32,6 +32,7 @@ Partial Class Form1
         Me.btnParalle_Invoke = New System.Windows.Forms.Button()
         Me.btnIP = New System.Windows.Forms.Button()
         Me.btnCollections = New System.Windows.Forms.Button()
+        Me.btnDuracion = New System.Windows.Forms.Button()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -128,11 +129,21 @@ Partial Class Form1
         Me.btnCollections.Text = "MKKIT_Collections"
         Me.btnCollections.UseVisualStyleBackColor = True
         '
-        'Form1
+        'btnDuracion
+        '
+        Me.btnDuracion.Location = New System.Drawing.Point(625, 111)
+        Me.btnDuracion.Name = "btnDuracion"
+        Me.btnDuracion.Size = New System.Drawing.Size(174, 30)
+        Me.btnDuracion.TabIndex = 11
+        Me.btnDuracion.Text = "MedirTiempo"
+        Me.btnDuracion.UseVisualStyleBackColor = True
+        '
+        'btnDuraction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 463)
+        Me.Controls.Add(Me.btnDuracion)
         Me.Controls.Add(Me.btnCollections)
         Me.Controls.Add(Me.btnIP)
         Me.Controls.Add(Me.btnParalle_Invoke)
@@ -143,8 +154,8 @@ Partial Class Form1
         Me.Controls.Add(Me.btnListar)
         Me.Controls.Add(Me.btnFtpUp)
         Me.Controls.Add(Me.txtDatos)
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "btnDuraction"
+        Me.Text = "Medir Tiempo"
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -160,4 +171,5 @@ Partial Class Form1
     Friend WithEvents btnParalle_Invoke As Button
     Friend WithEvents btnIP As Button
     Friend WithEvents btnCollections As Button
+    Friend WithEvents btnDuracion As Button
 End Class

@@ -4,8 +4,9 @@ Imports System.Security.Principal
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports IWshRuntimeLibrary
+Imports UtilesAlberto
 
-Public Class Form1
+Public Class btnDuraction
     Public ficheroLocal As String = "C:\Temp\ErrorFatal_0x0028.png"
     '
     ' ***** Servidor Primario FTP
@@ -40,11 +41,11 @@ Public Class Form1
     ' es agregado directamente
     Public Shared Sub PonTexto(ByVal text As String)
         If text.EndsWith(vbCrLf) = False Then text = text & vbCrLf
-        If Form1.txtDatos.InvokeRequired Then
+        If btnDuraction.txtDatos.InvokeRequired Then
             Dim d As New PonTextoCallBack(AddressOf PonTexto)
-            Form1.Invoke(d, New Object() {Form1.txtDatos.Text & text})
+            btnDuraction.Invoke(d, New Object() {btnDuraction.txtDatos.Text & text})
         Else
-            Form1.txtDatos.Text &= text
+            btnDuraction.txtDatos.Text &= text
         End If
     End Sub
 
@@ -143,11 +144,21 @@ Public Class Form1
     End Sub
 
     Private Sub btnParalle_Invoke_Click(sender As Object, e As EventArgs) Handles btnParalle_Invoke.Click
-        txtDatos.Text = ""
+        txtDatos.Text = "TASK" & vbCrLf
+        Utiles.mTime_Inicio()
+        txtDatos.SuspendLayout()
+        Parallel_Task()
+        txtDatos.ResumeLayout()
+        System.Windows.Forms.Application.DoEvents()
+        txtDatos.Text &= vbCrLf & Utiles.mTime_Duration & vbCrLf & vbCrLf
+        '
+        txtDatos.Text &= "PARALEL INVOKE" & vbCrLf
+        Utiles.mTime_Inicio()
         txtDatos.SuspendLayout()
         Parallel_Invoke()
         txtDatos.ResumeLayout()
         System.Windows.Forms.Application.DoEvents()
+        txtDatos.Text &= vbCrLf & Utiles.mTime_Duration
     End Sub
 
     Private Sub btnIP_Click(sender As Object, e As EventArgs) Handles btnIP.Click
@@ -216,5 +227,11 @@ Public Class Form1
         txtDatos.Text += "newArr (Nº Items=" & newArr.Count & ")" + vbCrLf
         txtDatos.Text += UtilesAlberto.Utiles.Array_Imprime(newArr) + vbCrLf
         txtDatos.Text += vbCrLf + vbCrLf
+    End Sub
+
+    Private Sub btnDuracion_Click(sender As Object, e As EventArgs) Handles btnDuracion.Click
+        Utiles.mTime_Inicio()
+        Threading.Thread.Sleep(4250)
+        Utiles.mTime_Duration(True)
     End Sub
 End Class
