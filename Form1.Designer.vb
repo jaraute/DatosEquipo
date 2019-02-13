@@ -33,6 +33,7 @@ Partial Class btnDuraction
         Me.btnIP = New System.Windows.Forms.Button()
         Me.btnCollections = New System.Windows.Forms.Button()
         Me.btnDuracion = New System.Windows.Forms.Button()
+        Me.btnComprime = New System.Windows.Forms.Button()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -122,7 +123,7 @@ Partial Class btnDuraction
         '
         'btnCollections
         '
-        Me.btnCollections.Location = New System.Drawing.Point(733, 64)
+        Me.btnCollections.Location = New System.Drawing.Point(625, 57)
         Me.btnCollections.Name = "btnCollections"
         Me.btnCollections.Size = New System.Drawing.Size(156, 28)
         Me.btnCollections.TabIndex = 10
@@ -131,18 +132,28 @@ Partial Class btnDuraction
         '
         'btnDuracion
         '
-        Me.btnDuracion.Location = New System.Drawing.Point(625, 111)
+        Me.btnDuracion.Location = New System.Drawing.Point(625, 100)
         Me.btnDuracion.Name = "btnDuracion"
         Me.btnDuracion.Size = New System.Drawing.Size(174, 30)
         Me.btnDuracion.TabIndex = 11
         Me.btnDuracion.Text = "MedirTiempo"
         Me.btnDuracion.UseVisualStyleBackColor = True
         '
+        'btnComprime
+        '
+        Me.btnComprime.Location = New System.Drawing.Point(838, 60)
+        Me.btnComprime.Name = "btnComprime"
+        Me.btnComprime.Size = New System.Drawing.Size(105, 25)
+        Me.btnComprime.TabIndex = 12
+        Me.btnComprime.Text = "Comprimir"
+        Me.btnComprime.UseVisualStyleBackColor = True
+        '
         'btnDuraction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 463)
+        Me.Controls.Add(Me.btnComprime)
         Me.Controls.Add(Me.btnDuracion)
         Me.Controls.Add(Me.btnCollections)
         Me.Controls.Add(Me.btnIP)
@@ -172,4 +183,5 @@ Partial Class btnDuraction
     Friend WithEvents btnIP As Button
     Friend WithEvents btnCollections As Button
     Friend WithEvents btnDuracion As Button
+    Friend WithEvents btnComprime As Button
 End Class

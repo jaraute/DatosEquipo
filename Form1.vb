@@ -234,4 +234,23 @@ Public Class btnDuraction
         Threading.Thread.Sleep(4250)
         Utiles.mTime_Duration(True)
     End Sub
+
+    Private Sub btnComprime_Click(sender As Object, e As EventArgs) Handles btnComprime.Click
+        ' *** UN SOLO FICHERO. Probado. Funciona
+        'Dim fi As String = "C:\DESARROLLO\_MODULOS-CLASES\WINDOWS\_WM Constantes y ejemplos.pdf"
+        'Utiles.Compress_FileNewZip(fi, True)
+        'Threading.Thread.Sleep(2000)
+        '
+        ' *** VARIOS FICHEROS. Probado. Funciona
+        'Dim fiAppend As String = "C:\DESARROLLO\_MODULOS-CLASES\WINDOWS\_Comprimidos.zip"
+        'Dim fi As String() = {"C:\DESARROLLO\_MODULOS-CLASES\WINDOWS\_WM Constantes y ejemplos.pdf", "C:\DESARROLLO\_MODULOS-CLASES\WINDOWS\_VK Codigos de teclas y ejemplos.pdf"}
+        'Utiles.Compress_FilesExistZip(fi, fiAppend, True)
+        'Threading.Thread.Sleep(2000)
+        '
+        ' *** CARPETA COMPLETA, RECURSIVAMENTE. Probado. Funciona
+        'Dim fiAppend As String = "C:\DESARROLLO\_MODULOS-CLASES\_WINDOES-Comprimido.zip"   ' No poner esto. Es opcioneal
+        Dim folder As String = "C:\DESARROLLO\_MODULOS-CLASES\WINDOWS"
+        Utiles.Compress_FolderFilesExistZip(folder,, True)
+        'Threading.Thread.Sleep(2000)
+    End Sub
 End Class
