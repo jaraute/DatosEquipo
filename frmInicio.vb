@@ -31,9 +31,10 @@ Public Class frmInicio
         CheckForIllegalCrossThreadCalls = False
         oPb = New ProgressBarCustom
         oPb.Dock = DockStyle.Fill
-        oPb.DisplayStyle = ProgressBarDisplayText.CustomText
+        oPb.DisplayStyle = ProgressBarDisplayText.CustomTextAndPercentage
         oPb.CustomText = "Procesando"
         Panel1.Controls.Add(oPb)
+        Panel1.ForeColor = Color.Blue
     End Sub
     '' Delegado para escribir en txtDatos.Text
     Public Delegate Sub PonTextoCallBack(text As String)
