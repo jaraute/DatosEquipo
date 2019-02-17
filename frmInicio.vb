@@ -6,8 +6,9 @@ Imports System.Text.RegularExpressions
 Imports IWshRuntimeLibrary
 Imports UtilesAlberto
 
-Public Class btnDuraction
+Public Class frmInicio
     Public ficheroLocal As String = "C:\Temp\ErrorFatal_0x0028.png"
+    Public oPb As ProgressBarCustom = Nothing
     '
     ' ***** Servidor Primario FTP
     Public FTP1_host As String = "ftp://ttu.ulmaconstruction.com"
@@ -26,8 +27,13 @@ Public Class btnDuraction
     Public FTP2_user As String = "ESOTAWS2\ftp_revit_user"
     Public FTP2_pass As String = "RehU768"
     '
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmInicio_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
+        oPb = New ProgressBarCustom
+        oPb.Dock = DockStyle.Fill
+        oPb.DisplayStyle = ProgressBarDisplayText.CustomText
+        oPb.CustomText = "Procesando"
+        Panel1.Controls.Add(oPb)
     End Sub
     '' Delegado para escribir en txtDatos.Text
     Public Delegate Sub PonTextoCallBack(text As String)
@@ -41,11 +47,11 @@ Public Class btnDuraction
     ' es agregado directamente
     Public Shared Sub PonTexto(ByVal text As String)
         If text.EndsWith(vbCrLf) = False Then text = text & vbCrLf
-        If btnDuraction.txtDatos.InvokeRequired Then
+        If frmInicio.txtDatos.InvokeRequired Then
             Dim d As New PonTextoCallBack(AddressOf PonTexto)
-            btnDuraction.Invoke(d, New Object() {btnDuraction.txtDatos.Text & text})
+            frmInicio.Invoke(d, New Object() {frmInicio.txtDatos.Text & text})
         Else
-            btnDuraction.txtDatos.Text &= text
+            frmInicio.txtDatos.Text &= text
         End If
     End Sub
 
@@ -250,7 +256,32 @@ Public Class btnDuraction
         ' *** CARPETA COMPLETA, RECURSIVAMENTE. Probado. Funciona
         'Dim fiAppend As String = "C:\DESARROLLO\_MODULOS-CLASES\_WINDOES-Comprimido.zip"   ' No poner esto. Es opcioneal
         Dim folder As String = "C:\DESARROLLO\_MODULOS-CLASES\WINDOWS"
-        Utiles.Compress_FolderFilesExistZip(folder,, True)
+        Utiles.Compress_FolderFilesExistZipSync(folder,, True)
         'Threading.Thread.Sleep(2000)
+    End Sub
+
+    Private Sub btnProgress1_Click(sender As Object, e As EventArgs) Handles btnProgress1.Click
+        If oPb.Value = 0 Then
+            ' No hace nada.
+        Else
+            oPb.Value = 0
+        End If
+        '
+        For i As Integer = 0 To 101 - 1
+            oPb.Value = i
+            System.Threading.Thread.Sleep(100)
+
+            If i > 30 AndAlso i < 50 Then
+                oPb.CustomText = "Registering Account"
+            End If
+
+            If i > 80 Then
+                oPb.CustomText = "Processing almost complete!"
+            End If
+
+            If i >= 99 Then
+                oPb.CustomText = "Complete"
+            End If
+        Next
     End Sub
 End Class

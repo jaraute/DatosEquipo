@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class btnDuraction
+Partial Class frmInicio
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -34,6 +34,8 @@ Partial Class btnDuraction
         Me.btnCollections = New System.Windows.Forms.Button()
         Me.btnDuracion = New System.Windows.Forms.Button()
         Me.btnComprime = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnProgress1 = New System.Windows.Forms.Button()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,7 +48,7 @@ Partial Class btnDuraction
         Me.txtDatos.Multiline = True
         Me.txtDatos.Name = "txtDatos"
         Me.txtDatos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDatos.Size = New System.Drawing.Size(587, 302)
+        Me.txtDatos.Size = New System.Drawing.Size(587, 237)
         Me.txtDatos.TabIndex = 1
         '
         'btnFtpUp
@@ -132,9 +134,9 @@ Partial Class btnDuraction
         '
         'btnDuracion
         '
-        Me.btnDuracion.Location = New System.Drawing.Point(625, 100)
+        Me.btnDuracion.Location = New System.Drawing.Point(610, 97)
         Me.btnDuracion.Name = "btnDuracion"
-        Me.btnDuracion.Size = New System.Drawing.Size(174, 30)
+        Me.btnDuracion.Size = New System.Drawing.Size(156, 30)
         Me.btnDuracion.TabIndex = 11
         Me.btnDuracion.Text = "MedirTiempo"
         Me.btnDuracion.UseVisualStyleBackColor = True
@@ -148,11 +150,31 @@ Partial Class btnDuraction
         Me.btnComprime.Text = "Comprimir"
         Me.btnComprime.UseVisualStyleBackColor = True
         '
-        'btnDuraction
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Location = New System.Drawing.Point(12, 408)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(587, 43)
+        Me.Panel1.TabIndex = 13
+        '
+        'btnProgress1
+        '
+        Me.btnProgress1.Location = New System.Drawing.Point(787, 95)
+        Me.btnProgress1.Name = "btnProgress1"
+        Me.btnProgress1.Size = New System.Drawing.Size(156, 35)
+        Me.btnProgress1.TabIndex = 14
+        Me.btnProgress1.Text = "ProgressBarCustom"
+        Me.btnProgress1.UseVisualStyleBackColor = True
+        '
+        'frmInicio
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(955, 463)
+        Me.Controls.Add(Me.btnProgress1)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnComprime)
         Me.Controls.Add(Me.btnDuracion)
         Me.Controls.Add(Me.btnCollections)
@@ -184,4 +206,6 @@ Partial Class btnDuraction
     Friend WithEvents btnCollections As Button
     Friend WithEvents btnDuracion As Button
     Friend WithEvents btnComprime As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents btnProgress1 As Button
 End Class

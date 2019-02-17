@@ -3,7 +3,7 @@
         ' Retrieve Goncharov's "Oblomov" from Gutenberg.org.
         Dim words As String() = CreateWordArray("http://www.gutenberg.org/files/54700/54700-0.txt")
 
-        btnDuraction.PonTexto("Total palabras encontradas = " & words.Count)
+        frmInicio.PonTexto("Total palabras encontradas = " & words.Count)
 
         '#Region "ParallelTasks"
         ' Perform three tasks in parallel on the source array
@@ -11,31 +11,31 @@
         opt.MaxDegreeOfParallelism = 1      ' 1 solo procesador (Asi funciona bien)
         '' Si usa más de 1 procesador, no rellena bien el TextBox.
         Dim t1 As Task = New Task(New Action(Sub()
-                                                 btnDuraction.PonTexto("Begin first task...")
+                                                 frmInicio.PonTexto("Begin first task...")
                                                  GetLongestWord(words)
                                              End Sub))
         t1.RunSynchronously()
         t1.Wait()
         Dim t2 As Task = New Task(New Action(Sub()
-                                                 btnDuraction.PonTexto("Begin second task...")
+                                                 frmInicio.PonTexto("Begin second task...")
                                                  GetMostCommonWords(words)
                                              End Sub))
         t2.RunSynchronously()
         t2.Wait()
         Dim t3 As Task = New Task(New Action(Sub()
-                                                 btnDuraction.PonTexto("Begin third task...")
+                                                 frmInicio.PonTexto("Begin third task...")
                                                  GetCountForWord(words, "sleep")
                                              End Sub))
         t3.RunSynchronously()
         t3.Wait()
-        btnDuraction.PonTexto("Returned from Task")
+        frmInicio.PonTexto("Returned from Task")
 
     End Sub
     Sub Parallel_Invoke()
         ' Retrieve Goncharov's "Oblomov" from Gutenberg.org.
         Dim words As String() = CreateWordArray("http://www.gutenberg.org/files/54700/54700-0.txt")
 
-        btnDuraction.PonTexto("Total palabras encontradas = " & words.Count)
+        frmInicio.PonTexto("Total palabras encontradas = " & words.Count)
 
         '#Region "ParallelTasks"
         ' Perform three tasks in parallel on the source array
@@ -43,21 +43,21 @@
         opt.MaxDegreeOfParallelism = 1      ' 1 solo procesador (Asi funciona bien)
         '' Si usa más de 1 procesador, no rellena bien el TextBox.
         Parallel.Invoke(opt, Sub()
-                                 btnDuraction.PonTexto("Begin first task...")
+                                 frmInicio.PonTexto("Begin first task...")
                                  GetLongestWord(words)
                                  ' close first Action
                              End Sub,
                         Sub()
-                            btnDuraction.PonTexto("Begin second task...")
+                            frmInicio.PonTexto("Begin second task...")
                             GetMostCommonWords(words)
                             'close second Action
                         End Sub,
                         Sub()
-                            btnDuraction.PonTexto("Begin third task...")
+                            frmInicio.PonTexto("Begin third task...")
                             GetCountForWord(words, "sleep")
                             'close third Action
                         End Sub)
-        btnDuraction.PonTexto("Returned from Parallel.Invoke")
+        frmInicio.PonTexto("Returned from Parallel.Invoke")
     End Sub
 
 #Region "HelperMethods"
@@ -66,7 +66,7 @@
                        Where word.ToUpper().Contains(term.ToUpper())
                        Select word
 
-        btnDuraction.PonTexto("Task 3 -- The word " & term & " occurs " & findWord.Count() & " times.")
+        frmInicio.PonTexto("Task 3 -- The word " & term & " occurs " & findWord.Count() & " times.")
     End Sub
 
     Sub GetMostCommonWords(ByVal words As String())
@@ -81,9 +81,9 @@
                           Select grp
                           Take (10)
 
-        btnDuraction.PonTexto("Task 2 -- The most common words are:")
+        frmInicio.PonTexto("Task 2 -- The most common words are:")
         For Each v In commonWords
-            btnDuraction.PonTexto(v(0))
+            frmInicio.PonTexto(v(0))
         Next
     End Sub
 
@@ -92,13 +92,13 @@
                            Order By w.Length Descending
                            Select w).First()
 
-        btnDuraction.PonTexto("Task 1 -- The longest word is " & longestWord & ".")
+        frmInicio.PonTexto("Task 1 -- The longest word is " & longestWord & ".")
     End Sub
 
 
     ' An http request performed synchronously for simplicity.
     Function CreateWordArray(ByVal uri As String) As String()
-        btnDuraction.PonTexto("Retrieving from " & uri)
+        frmInicio.PonTexto("Retrieving from " & uri)
 
         ' Download a web page the easy way.
         Dim s As String = New System.Net.WebClient().DownloadString(uri)
