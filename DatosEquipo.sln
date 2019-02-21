@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DatosEquipo", "DatosEquipo.vbproj", "{C1237494-92E1-4C78-AD8F-383DAE49CD26}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UtilesAlberto", "..\..\_MODULOS-CLASES\WINDOWS\UtilesAlberto\UtilesAlberto.vbproj", "{7E7B7FD9-7145-4607-B2B8-BB292871B260}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Forge2acad", "..\..\_MODULOS-CLASES\FORGE\Forge2acad\Forge2acad.vbproj", "{D89877A5-8464-4504-8474-0C90C05D4D01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89877A5-8464-4504-8474-0C90C05D4D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89877A5-8464-4504-8474-0C90C05D4D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89877A5-8464-4504-8474-0C90C05D4D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89877A5-8464-4504-8474-0C90C05D4D01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3ADCF729-CFB0-4C23-9754-57940011EC5E}
 	EndGlobalSection
 EndGlobal

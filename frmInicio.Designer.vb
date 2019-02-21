@@ -36,6 +36,7 @@ Partial Class frmInicio
         Me.btnComprime = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnProgress1 = New System.Windows.Forms.Button()
+        Me.btnForge = New System.Windows.Forms.Button()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -98,7 +99,7 @@ Partial Class frmInicio
         '
         'pb1
         '
-        Me.pb1.Location = New System.Drawing.Point(625, 149)
+        Me.pb1.Location = New System.Drawing.Point(610, 149)
         Me.pb1.Name = "pb1"
         Me.pb1.Size = New System.Drawing.Size(318, 302)
         Me.pb1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -168,11 +169,21 @@ Partial Class frmInicio
         Me.btnProgress1.Text = "ProgressBarCustom"
         Me.btnProgress1.UseVisualStyleBackColor = True
         '
+        'btnForge
+        '
+        Me.btnForge.Location = New System.Drawing.Point(956, 20)
+        Me.btnForge.Name = "btnForge"
+        Me.btnForge.Size = New System.Drawing.Size(174, 31)
+        Me.btnForge.TabIndex = 15
+        Me.btnForge.Text = "Forge Conecta"
+        Me.btnForge.UseVisualStyleBackColor = True
+        '
         'frmInicio
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(955, 463)
+        Me.ClientSize = New System.Drawing.Size(1142, 463)
+        Me.Controls.Add(Me.btnForge)
         Me.Controls.Add(Me.btnProgress1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnComprime)
@@ -187,7 +198,7 @@ Partial Class frmInicio
         Me.Controls.Add(Me.btnListar)
         Me.Controls.Add(Me.btnFtpUp)
         Me.Controls.Add(Me.txtDatos)
-        Me.Name = "btnDuraction"
+        Me.Name = "frmInicio"
         Me.Text = "Medir Tiempo"
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -208,4 +219,5 @@ Partial Class frmInicio
     Friend WithEvents btnComprime As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnProgress1 As Button
+    Friend WithEvents btnForge As Button
 End Class

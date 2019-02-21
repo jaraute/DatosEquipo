@@ -136,6 +136,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\_MODULOS-CLASES\FORGE\Forge2acad\Forge2acad.vbproj">
+      <Project>{d89877a5-8464-4504-8474-0c90c05d4d01}</Project>
+      <Name>Forge2acad</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\_MODULOS-CLASES\WINDOWS\UtilesAlberto\UtilesAlberto.vbproj">
       <Project>{7e7b7fd9-7145-4607-b2b8-bb292871b260}</Project>
       <Name>UtilesAlberto</Name>

@@ -285,4 +285,13 @@ Public Class frmInicio
             End If
         Next
     End Sub
+
+    Private Async Sub btnForge_Click(sender As Object, e As EventArgs) Handles btnForge.Click
+        txtDatos.Text = ""
+        ' Sincrono
+        txtDatos.Text = Forge2acad.Forge.TestSync_2L
+        ' Asincrono
+        Dim p As Object = Await Forge2acad.Forge.TestAsync_2L
+        txtDatos.Text &= vbCrLf & vbCrLf & p.ToString
+    End Sub
 End Class
