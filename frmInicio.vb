@@ -5,10 +5,24 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports IWshRuntimeLibrary
 Imports UtilesAlberto
+Imports f2 = Forge2acad
+Imports f2f = Forge2acad.Forge
 
 Public Class frmInicio
     Public ficheroLocal As String = "C:\Temp\ErrorFatal_0x0028.png"
     Public oPb As ProgressBarCustom = Nothing
+
+    ' INDICAD360
+    'Const client_id As String ="WdG2ZkYcQjtJGAo0UB7h3VxA6szJATRT"
+    'Const client_secret As String = "ytRMu4toSG2zJhCE"
+    ' MKINVWEB
+    Const client_id As String = "7uFy9CHXFrkdCIj9hn6EsucjEl9eiHgv"
+    Const client_secret As String = "gger32QDytcDUeyI"
+    Const callback_url As String = "http://localhost:17472/api/forge/callback/oauth"
+    Public pD As Forge2acad.pData = Nothing
+    Public scope = New Autodesk.Forge.Scope() {
+        Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.DataWrite,
+        Autodesk.Forge.Scope.BucketCreate, Autodesk.Forge.Scope.BucketRead}
     '
     ' ***** Servidor Primario FTP
     Public FTP1_host As String = "ftp://ttu.ulmaconstruction.com"
@@ -35,6 +49,13 @@ Public Class frmInicio
         oPb.CustomText = "Procesando"
         Panel1.Controls.Add(oPb)
         Panel1.ForeColor = Color.Blue
+        '
+        pD = New Forge2acad.pData(
+            If(My.Settings.FORGE_CLIENT_ID, client_id),
+            If(My.Settings.FORGE_CLIENT_SECRET, client_secret),
+            If(My.Settings.FORGE_CALLBACK_URL, callback_url),
+        scope
+            )
     End Sub
     '' Delegado para escribir en txtDatos.Text
     Public Delegate Sub PonTextoCallBack(text As String)
@@ -287,11 +308,14 @@ Public Class frmInicio
     End Sub
 
     Private Async Sub btnForge_Click(sender As Object, e As EventArgs) Handles btnForge.Click
-        txtDatos.Text = ""
-        ' Sincrono
-        txtDatos.Text = Forge2acad.Forge.TestSync_2L
-        ' Asincrono
-        Dim p As Object = Await Forge2acad.Forge.TestAsync_2L
-        txtDatos.Text &= vbCrLf & vbCrLf & p.ToString
+        Dim p As Object = Await Forge2acad.Forge.GetToken(pD)
+        txtDatos.Text = p.ToString & vbCrLf & vbCrLf
+        'txtDatos.Text &= "access_token = " & f2f.Base64Encode(p.access_token) & vbCrLf
+        txtDatos.Text &= "access_token = " & p.access_token & vbCrLf
+        txtDatos.Text &= "token_type = " & p.token_type & vbCrLf
+        txtDatos.Text &= "expires_in = " & p.expires_in & vbCrLf & vbCrLf & vbCrLf
+        '
+        Dim q As Object = Await f2f.OAuthCallback(pD)
+        txtDatos.Text &= p.ToString
     End Sub
 End Class

@@ -53,6 +53,33 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("7uFy9CHXFrkdCIj9hn6EsucjEl9eiHgv")>  _
+        Public ReadOnly Property FORGE_CLIENT_ID() As String
+            Get
+                Return CType(Me("FORGE_CLIENT_ID"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("gger32QDytcDUeyI")>  _
+        Public ReadOnly Property FORGE_CLIENT_SECRET() As String
+            Get
+                Return CType(Me("FORGE_CLIENT_SECRET"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:17472/api/forge/callback/oauth")>  _
+        Public ReadOnly Property FORGE_CALLBACK_URL() As String
+            Get
+                Return CType(Me("FORGE_CALLBACK_URL"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

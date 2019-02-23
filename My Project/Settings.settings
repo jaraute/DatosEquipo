@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" UseMySettingsClassName="true">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="FORGE_CLIENT_ID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7uFy9CHXFrkdCIj9hn6EsucjEl9eiHgv</Value>
+    </Setting>
+    <Setting Name="FORGE_CLIENT_SECRET" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">gger32QDytcDUeyI</Value>
+    </Setting>
+    <Setting Name="FORGE_CALLBACK_URL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:17472/api/forge/callback/oauth</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
