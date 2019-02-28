@@ -23,10 +23,6 @@ Public Class frmInicio
     Const client_secret As String = "gger32QDytcDUeyI"
     Const callback_url As String = "http://localhost:17472/api/forge/callback/oauth"
     Public pD As Forge2acad.pData = Nothing
-    'Public scope = New Autodesk.Forge.Scope() {
-    '    Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.DataWrite,
-    '    Autodesk.Forge.Scope.BucketCreate, Autodesk.Forge.Scope.BucketRead}
-    'Public scope = New Autodesk.Forge.Scope() {Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.BucketRead}
     Public scope = New Autodesk.Forge.Scope() {
         afs.BucketCreate, afs.BucketRead, afs.DataCreate, afs.DataRead, afs.DataWrite, afs.ViewablesRead}
     '
@@ -314,7 +310,22 @@ Public Class frmInicio
     End Sub
 
     Private Async Sub btnForge_Click(sender As Object, e As EventArgs) Handles btnForge.Click
+        If pD Is Nothing Then
+            ' Autodesk Forge Conexion Data
+            pD = New Forge2acad.pData(
+            If(My.Settings.FORGE_CLIENT_ID, client_id),
+            If(My.Settings.FORGE_CLIENT_SECRET, client_secret),
+            If(My.Settings.FORGE_CALLBACK_URL, callback_url),
+            scope)
+        End If
+        '
         Dim p As Object = Await Forge2acad.Forge.GetToken(pD)
+        If p IsNot Nothing Then ' AndAlso p.access_token <> "" Then
+            pD._token_access = p.access_token
+            pD._token_type = p.token_type
+            pD._token_expire_in = p.expires_in
+        End If
+        '
         txtDatos.Text = p.ToString & vbCrLf & vbCrLf
         'txtDatos.Text &= "access_token = " & f2f.Base64Encode(p.access_token) & vbCrLf
         txtDatos.Text &= "access_token = " & p.access_token & vbCrLf
@@ -322,6 +333,6 @@ Public Class frmInicio
         txtDatos.Text &= "expires_in = " & p.expires_in & vbCrLf & vbCrLf & vbCrLf
         Dim filePath As String = "C:\inetpub\wwwroot\Visor\B20.00.2000_GUF-P2000.dwf"
         '
-        txtDatos.Text &= Await f2f.Bucket_Create_UploadFile(p.access_token, filePath) & vbCrLf & vbCrLf
+        txtDatos.Text &= CType(Await f2f.Bucket_Create_UploadFile(p.access_token, filePath), Object).ToString & vbCrLf & vbCrLf
     End Sub
 End Class
