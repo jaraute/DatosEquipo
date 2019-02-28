@@ -7,6 +7,9 @@ Imports IWshRuntimeLibrary
 Imports UtilesAlberto
 Imports f2 = Forge2acad
 Imports f2f = Forge2acad.Forge
+Imports af = Autodesk.Forge
+Imports afm = Autodesk.Forge.Model
+Imports afs = Autodesk.Forge.Scope
 
 Public Class frmInicio
     Public ficheroLocal As String = "C:\Temp\ErrorFatal_0x0028.png"
@@ -20,9 +23,12 @@ Public Class frmInicio
     Const client_secret As String = "gger32QDytcDUeyI"
     Const callback_url As String = "http://localhost:17472/api/forge/callback/oauth"
     Public pD As Forge2acad.pData = Nothing
+    'Public scope = New Autodesk.Forge.Scope() {
+    '    Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.DataWrite,
+    '    Autodesk.Forge.Scope.BucketCreate, Autodesk.Forge.Scope.BucketRead}
+    'Public scope = New Autodesk.Forge.Scope() {Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.BucketRead}
     Public scope = New Autodesk.Forge.Scope() {
-        Autodesk.Forge.Scope.DataRead, Autodesk.Forge.Scope.DataWrite,
-        Autodesk.Forge.Scope.BucketCreate, Autodesk.Forge.Scope.BucketRead}
+        afs.BucketCreate, afs.BucketRead, afs.DataCreate, afs.DataRead, afs.DataWrite, afs.ViewablesRead}
     '
     ' ***** Servidor Primario FTP
     Public FTP1_host As String = "ftp://ttu.ulmaconstruction.com"
@@ -314,8 +320,8 @@ Public Class frmInicio
         txtDatos.Text &= "access_token = " & p.access_token & vbCrLf
         txtDatos.Text &= "token_type = " & p.token_type & vbCrLf
         txtDatos.Text &= "expires_in = " & p.expires_in & vbCrLf & vbCrLf & vbCrLf
+        Dim filePath As String = "C:\inetpub\wwwroot\Visor\B20.00.2000_GUF-P2000.dwf"
         '
-        Dim q As Object = Await f2f.OAuthCallback(pD)
-        txtDatos.Text &= p.ToString
+        txtDatos.Text &= Await f2f.Bucket_Create_UploadFile(p.access_token, filePath) & vbCrLf & vbCrLf
     End Sub
 End Class
